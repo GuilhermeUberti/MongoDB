@@ -4,17 +4,37 @@ import { Product } from '../models/Product';
 import User from '../models/User';
 
 export const home = async (req: Request, res: Response) => {
+    let users = await User.find({}).sort({ 'name.firstName': 1 });
 
-    let usuarios = await User.find({
-        age: { $gt: 19 }
-    }).sort({ "first.name": 1, "lastName:": 1 });
-    console.log("Usuários: ", usuarios);
+    
 
     res.render('pages/home', {
         name: 'Guilherme',
         lastName: 'Uberti',
+        users
     });
 };
+
+/*
+let newUser = await User.create({
+    name: { "firstName": 'Eliza', "lastName": 'Samudio' },
+    email: "eliza@bol.com.br",
+    age: 33,
+    interests: [
+        'basquete',
+        'volei',
+        'pastel'
+    ]
+});
+
+console.log('Novo Usuário:', newUser);
+
+let usuarios = await User.find({
+    age: { $gt: 30 }
+}).sort({ "first.name": 1, "lastName:": 1 })
+.skip(1).limit(2);
+console.log("Usuários: ", usuarios);
+*/
 
 /*
     gt = Greater Then = Maior que

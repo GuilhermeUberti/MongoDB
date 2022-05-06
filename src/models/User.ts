@@ -7,7 +7,7 @@ type UserType = {
     },
     email: string,
     age: number,
-    interests: [string],
+    interests: [string, string, string],
 }
 
 const schema = new Schema<UserType>({
