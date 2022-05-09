@@ -19,10 +19,33 @@ export const newUserAction = async (req: Request, res: Response) => {
         },
         email: req.body.email as string,
         age: req.body.age as number,
-        interests: (req.body.interests).split(',')
+        interests: (req.body.interests).split(', ,')
     }).save((err, data) => {
         if (err) return console.error("Erro ao cadastrar usuário: ", err.message);
         console.log(data, "Usuário inserido com sucesso!");
     });
+    res.redirect('/');
+}
+
+export const incrementAge = async (req: Request, res: Response) => {
+    let user = await User.findOne({ _id: req.params.id })
+    if (user) {
+        user.age += 1;
+        await user.save();
+    }
+    res.redirect('/');
+}
+
+export const discreaseAge = async (req: Request, res: Response) => {
+    let user = await User.findOne({ _id: req.params.id })
+    if(user){
+        user.age -= 1;
+        await user.save();
+    }
+    res.redirect('/');
+}
+
+export const removeUser = async (req: Request, res: Response) => {
+    await User.deleteOne({ _id: req.params.id })
     res.redirect('/');
 }

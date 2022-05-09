@@ -25,7 +25,11 @@ Opa {{name}} {{lastName}}, tudo bem?
 <h2>Usuários</h2>
 <ul>
 {{#users}}
-    <li>{{name.firstName}} {{name.lastName}}, {{age}} anos e ele tem interesses em: {{interests}}. </li>
+    <li>{{name.firstName}} {{name.lastName}}, {{age}} anos e ele tem interesses em: {{interests}}.  
+        <a href="/incrementAge/{{_id}}/">+1</a>
+        <a href="/discreaseAge/{{_id}}/">-1</a>
+        <a href="/removeUser/{{_id}}">Remove</a>
+    </li>
 {{/users}}
 </ul>
 
